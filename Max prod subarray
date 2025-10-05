@@ -1,0 +1,35 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        
+    
+        # Start with the first number as our answer
+
+        if len(nums)==0: 
+            return 0
+
+
+        if len(nums) == 1:
+            return nums[0]
+        
+
+        # max_here: biggest product ending here
+        # min_here: smallest (most negative) product ending here
+        max_here = [0]*len(nums)
+        min_here = [0]*len(nums)
+        max_here[0] = nums[0]
+        min_here[0] = nums[0]
+
+        # Loop through each number in the array
+        for i in range(1, len(nums)):
+     # Store old max_here value for use in min_here calculation
+            
+
+            # Compute new max_here
+            max_here[i] = max(nums[i], nums[i] * max_here[i-1], nums[i]* min_here[i-1])
+
+            # Compute new min_here
+            min_here[i] = min(nums[i], nums[i] * max_here[i-1], nums[i]* min_here[i-1])
+
+            # Print everything to understand the flow
+          
+        return max(max_here)
