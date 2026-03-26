@@ -1,0 +1,22 @@
+class Solution:
+    def minOperations(self, n: int) -> int:
+        memo = {}
+
+        def solve(x):
+            if x == 0:
+                return 0
+            if x in memo:
+                return memo[x]
+
+            low = 1
+            while low * 2 <= x:
+                low = low * 2
+
+            if low == x:
+                return 1 
+
+            high = low * 2
+            memo[x] = 1 + min(solve(x - low), solve(high - x))
+            return memo[x]  
+
+        return solve(n)
